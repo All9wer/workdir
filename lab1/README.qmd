@@ -1,10 +1,9 @@
 ---
-
-title: "Разработка отчета"
-author: "chirkov.ilya4@yandex.ru"
-format: 
-  md:
-    output-file: README.md
+ title: "Разработка отчета"
+ author: "chirkov.ilya4@yandex.ru"
+ format: 
+   md:
+     output-file: README.md
 ---
 
 # Подготовка воспроизводимых отчетов 
