@@ -34,12 +34,11 @@
   
 2. Запустить задание с помощью swirl::swirl()
 
-```{terminal}
-swirl::swirl()
-```
+      ```{terminal}
+      swirl::swirl()
+      ```
     
-  
-    ![](img/2.png)
+     ![](img/2.png)
   
 3. Выбрать из меню курсов 1. R Programming: The basics of programming in R
 
