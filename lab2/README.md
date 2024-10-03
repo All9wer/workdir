@@ -21,44 +21,30 @@ chirkov.ilya4@yandex.ru
 
 ## Ход работы
 
-1.  Установка программного пакета dplyr.
+### 1. Установка программного пакета dplyr.
 
-    ``` r
-    install.packages("dplyr")
-    ```
+``` r
+install.packages("dplyr")
+```
 
-2.  Загрузка библиотеки
+### 2. Загрузка библиотеки
 
-    ::: {.cell}
-
-    ``` r
-    library("dplyr")
-    ```
-
-    ::: {.cell-output .cell-output-stderr}
+``` r
+library("dplyr")
+```
 
 
-        Присоединяю пакет: 'dplyr'
+    Присоединяю пакет: 'dplyr'
 
-    :::
+    Следующие объекты скрыты от 'package:stats':
 
-    ::: {.cell-output .cell-output-stderr}
+        filter, lag
 
-        Следующие объекты скрыты от 'package:stats':
+    Следующие объекты скрыты от 'package:base':
 
-            filter, lag
+        intersect, setdiff, setequal, union
 
-    :::
-
-    ::: {.cell-output .cell-output-stderr}
-
-        Следующие объекты скрыты от 'package:base':
-
-            intersect, setdiff, setequal, union
-
-    ::: :::
-
-3.  Сколько строк в датафрейме?
+### 3. Сколько строк в датафрейме?
 
 ``` r
 starwars %>% nrow()
@@ -66,33 +52,20 @@ starwars %>% nrow()
 
     [1] 87
 
-1.  Сколько столбцов в датафрейме?
+### 4. Сколько столбцов в датафрейме?
 
-    ::: {.cell}
+``` r
+starwars %>% ncol()
+```
 
-    ``` r
-      starwars %>% ncol()
-    ```
+    [1] 14
 
-    ::: {.cell-output .cell-output-stdout}
+### 5. Как посмотреть примерный вид датафрейма?
 
-        [1] 14
+``` r
+starwars %>% glimpse()
+```
 
-    ::: :::
-
-2.  Как посмотреть примерный вид датафрейма?
-
-<!-- -->
-
-    ::: {.cell}
-
-    ```{.r .cell-code}
-      starwars %>% glimpse()
-    ```
-
-    ::: {.cell-output .cell-output-stdout}
-
-    ```
     Rows: 87
     Columns: 14
     $ name       <chr> "Luke Skywalker", "C-3PO", "R2-D2", "Darth Vader", "Leia Or…
@@ -109,13 +82,8 @@ starwars %>% nrow()
     $ films      <list> <"A New Hope", "The Empire Strikes Back", "Return of the J…
     $ vehicles   <list> <"Snowspeeder", "Imperial Speeder Bike">, <>, <>, <>, "Imp…
     $ starships  <list> <"X-wing", "Imperial shuttle">, <>, <>, "TIE Advanced x1",…
-    ```
 
-
-    :::
-    :::
-
-1.  Сколько уникальных рас персонажей (species) представлено в данных?
+### 6. Сколько уникальных рас персонажей (species) представлено в данных?
 
 ``` r
 starwars %>% distinct(species) %>% nrow()
@@ -123,7 +91,7 @@ starwars %>% distinct(species) %>% nrow()
 
     [1] 38
 
-1.  Найти самого высокого персонажа.
+### 7. Найти самого высокого персонажа.
 
 ``` r
 starwars %>% filter(is.na(height) == FALSE) %>% slice_max(height) %>% select(name,height)
@@ -134,7 +102,7 @@ starwars %>% filter(is.na(height) == FALSE) %>% slice_max(height) %>% select(nam
       <chr>        <int>
     1 Yarael Poof    264
 
-1.  Найти всех персонажей ниже 170
+### 8. Найти всех персонажей ниже 170
 
 ``` r
 starwars %>% filter(height < 170) %>% select(name,height)
@@ -155,8 +123,7 @@ starwars %>% filter(height < 170) %>% select(name,height)
     10 Watto                    137
     # ℹ 12 more rows
 
-1.  Подсчитать ИМТ (индекс массы тела) для всех персонажей. ИМТ
-    подсчитать по формуле
+### 9. Подсчитать ИМТ (индекс массы тела) для всех персонажей. ИМТ подсчитать по формуле
 
 ![](img/1.png)
 
@@ -179,8 +146,7 @@ print(starwars %>% mutate(imt = mass / (height)^2) %>% select(name, imt))
     10 Obi-Wan Kenobi     0.00232
     # ℹ 77 more rows
 
-1.  Найти 10 самых “вытянутых” персонажей. “Вытянутость” оценить по
-    отношению массы (mass) к росту (height) персонажей.
+### 10. Найти 10 самых “вытянутых” персонажей. “Вытянутость” оценить по отношению массы (mass) к росту (height) персонажей.
 
 ``` r
 starwars %>% mutate(v = mass/height) %>% select(name,v) %>% head(.,10)
@@ -200,7 +166,7 @@ starwars %>% mutate(v = mass/height) %>% select(name,v) %>% head(.,10)
      9 Biggs Darklighter  0.459
     10 Obi-Wan Kenobi     0.423
 
-1.  Найти средний возраст персонажей каждой расы вселенной Звездных войн
+### 11. Найти средний возраст персонажей каждой расы вселенной Звездных войн
 
 ``` r
 'starwars %>% gr'
@@ -208,5 +174,4 @@ starwars %>% mutate(v = mass/height) %>% select(name,v) %>% head(.,10)
 
     [1] "starwars %>% gr"
 
-1.  Найти самый распространенный цвет глаз персонажей вселенной Звездных
-    войн.
+### 12. Найти самый распространенный цвет глаз персонажей вселенной Звездных войн.
