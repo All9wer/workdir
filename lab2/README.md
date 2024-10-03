@@ -21,103 +21,66 @@ chirkov.ilya4@yandex.ru
 
 ## Ход работы
 
-1.  Установка и загрузка программного пакета dplyr.
+1.  Установка программного пакета dplyr.
 
-<!-- -->
+    ``` r
+    install.packages("dplyr")
+    ```
+
+2.  Загрузка библиотеки
 
     ::: {.cell}
 
-    ```{.r .cell-code}
-    'install.packages("dplyr")'
-    ```
-
-    ::: {.cell-output .cell-output-stdout}
-
-    ```
-    [1] "install.packages(\"dplyr\")"
-    ```
-
-
-    :::
-
-    ```{.r .cell-code}
-    library(dplyr)
+    ``` r
+    library("dplyr")
     ```
 
     ::: {.cell-output .cell-output-stderr}
 
-    ```
 
-    Присоединяю пакет: 'dplyr'
-    ```
-
+        Присоединяю пакет: 'dplyr'
 
     :::
 
     ::: {.cell-output .cell-output-stderr}
 
-    ```
-    Следующие объекты скрыты от 'package:stats':
+        Следующие объекты скрыты от 'package:stats':
 
-        filter, lag
-    ```
-
+            filter, lag
 
     :::
 
     ::: {.cell-output .cell-output-stderr}
 
-    ```
-    Следующие объекты скрыты от 'package:base':
+        Следующие объекты скрыты от 'package:base':
 
-        intersect, setdiff, setequal, union
-    ```
+            intersect, setdiff, setequal, union
 
+    ::: :::
 
-    :::
-    :::
+3.  Сколько строк в датафрейме?
 
-1.  Сколько строк в датафрейме?
+``` r
+starwars %>% nrow()
+```
 
-<!-- -->
-
-    ::: {.cell}
-
-    ```{.r .cell-code}
-    starwars %>% nrow()
-    ```
-
-    ::: {.cell-output .cell-output-stdout}
-
-    ```
     [1] 87
-    ```
-
-
-    :::
-    :::
 
 1.  Сколько столбцов в датафрейме?
 
-<!-- -->
-
     ::: {.cell}
 
-    ```{.r .cell-code}
+    ``` r
       starwars %>% ncol()
     ```
 
     ::: {.cell-output .cell-output-stdout}
 
-    ```
-    [1] 14
-    ```
+        [1] 14
 
+    ::: :::
 
-    :::
-    :::
-
-1.  Как посмотреть примерный вид датафрейма?
+2.  Как посмотреть примерный вид датафрейма?
 
 <!-- -->
 
