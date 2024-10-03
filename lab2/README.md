@@ -1,8 +1,6 @@
 # Основы обработки данных с помощью R и Dplyr
 chirkov.ilya4@yandex.ru
 
-# Основы обработки данных с помощью R и Dplyr
-
 ## Цель работы
 
 1.  Развить практические навыки использования языка программирования R
@@ -86,10 +84,10 @@ starwars %>% glimpse()
 ### 6. Сколько уникальных рас персонажей (species) представлено в данных?
 
 ``` r
-starwars %>% distinct(species) %>% nrow()
+starwars %>% distinct(species) %>% filter(!is.na(species)) %>% nrow()
 ```
 
-    [1] 38
+    [1] 37
 
 ### 7. Найти самого высокого персонажа.
 
@@ -149,29 +147,92 @@ print(starwars %>% mutate(imt = mass / (height)^2) %>% select(name, imt))
 ### 10. Найти 10 самых “вытянутых” персонажей. “Вытянутость” оценить по отношению массы (mass) к росту (height) персонажей.
 
 ``` r
-starwars %>% mutate(v = mass/height) %>% select(name,v) %>% head(.,10)
+starwars %>% mutate(v = mass/height)%>% arrange(desc(v)) %>% select(name,v) %>% head(n=10)
 ```
 
     # A tibble: 10 × 2
-       name                   v
-       <chr>              <dbl>
-     1 Luke Skywalker     0.448
-     2 C-3PO              0.449
-     3 R2-D2              0.333
-     4 Darth Vader        0.673
-     5 Leia Organa        0.327
-     6 Owen Lars          0.674
-     7 Beru Whitesun Lars 0.455
-     8 R5-D4              0.330
-     9 Biggs Darklighter  0.459
-    10 Obi-Wan Kenobi     0.423
+       name                      v
+       <chr>                 <dbl>
+     1 Jabba Desilijic Tiure 7.76 
+     2 Grievous              0.736
+     3 IG-88                 0.7  
+     4 Owen Lars             0.674
+     5 Darth Vader           0.673
+     6 Jek Tono Porkins      0.611
+     7 Bossk                 0.595
+     8 Tarfful               0.581
+     9 Dexter Jettster       0.515
+    10 Chewbacca             0.491
 
 ### 11. Найти средний возраст персонажей каждой расы вселенной Звездных войн
 
 ``` r
-'starwars %>% gr'
+starwars %>% group_by(species) %>% 
+filter(!is.na(birth_year)) %>% 
+summarise(mean(birth_year))
 ```
 
-    [1] "starwars %>% gr"
+    # A tibble: 15 × 2
+       species        `mean(birth_year)`
+       <chr>                       <dbl>
+     1 Cerean                       92  
+     2 Droid                        53.3
+     3 Ewok                          8  
+     4 Gungan                       52  
+     5 Human                        53.7
+     6 Hutt                        600  
+     7 Kel Dor                      22  
+     8 Mirialan                     49  
+     9 Mon Calamari                 41  
+    10 Rodian                       44  
+    11 Trandoshan                   53  
+    12 Twi'lek                      48  
+    13 Wookiee                     200  
+    14 Yoda's species              896  
+    15 Zabrak                       54  
 
 ### 12. Найти самый распространенный цвет глаз персонажей вселенной Звездных войн.
+
+``` r
+starwars %>% 
+filter(!is.na(eye_color)) %>%  
+group_by(eye_color) %>% summarise(sum = n()) %>%
+arrange(desc(sum)) %>% head(1)
+```
+
+    # A tibble: 1 × 2
+      eye_color   sum
+      <chr>     <int>
+    1 brown        21
+
+### 11. Подсчитать среднюю длину имени в каждой расе вселенной Звездных войн.
+
+``` r
+starwars %>% filter(!is.na(species)) %>%
+mutate(nlen=nchar(name)) %>% group_by(species) %>% summarise(mean(nlen))
+```
+
+    # A tibble: 37 × 2
+       species   `mean(nlen)`
+       <chr>            <dbl>
+     1 Aleena           12   
+     2 Besalisk         15   
+     3 Cerean           12   
+     4 Chagrian         10   
+     5 Clawdite         10   
+     6 Droid             4.83
+     7 Dug               7   
+     8 Ewok             21   
+     9 Geonosian        17   
+    10 Gungan           11.7 
+    # ℹ 27 more rows
+
+## Оценка результатов
+
+Были развиты практические навыки использования функций обработки данных
+пакета dplyr на примере дата сета “starwars”
+
+## Вывод
+
+Помимо базовых возжностей языка R для обработки данных, существуют
+библиотеки для более комфортной и наглядной работы с данными

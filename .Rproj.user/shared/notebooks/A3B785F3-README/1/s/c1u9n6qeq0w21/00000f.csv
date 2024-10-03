@@ -1,0 +1,2 @@
+"0","starwars %>% filter(!is.na(species)) %>%"
+"0","mutate(nlen=nchar(name)) %>% group_by(species) %>% summarise(mean(nlen))"

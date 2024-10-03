@@ -1,0 +1,1 @@
+"0","print(starwars %>% mutate(imt = mass / (height)^2) %>% select(name, imt))"

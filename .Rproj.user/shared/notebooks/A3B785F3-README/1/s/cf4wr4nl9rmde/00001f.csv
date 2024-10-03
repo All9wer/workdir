@@ -1,0 +1,4 @@
+"0","starwars %>% "
+"0","filter(!is.na(eye_color)) %>%  "
+"0","group_by(eye_color) %>% summarise(sum = n()) %>%"
+"0","arrange(desc(sum)) %>% head(1)"

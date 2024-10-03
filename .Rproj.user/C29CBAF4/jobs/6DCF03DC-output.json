@@ -1,4 +1,0 @@
-[1,"==> quarto preview README.qmd --to md --no-watch-inputs --no-browse\n\n"]
-[1,"pandoc \n  to: >-\n    markdown_strict+raw_html+all_symbols_escapable+backtick_code_blocks+fenced_code_blocks+space_in_atx_header+intraword_underscores+lists_without_preceding_blankline+shortcut_reference_links\n  output-file: README.md\n  standalone: true\n  default-image-extension: png\n  \nmetadata\n  title: Разработка отчета\n  author: chirkov.ilya4@yandex.ru\n  \n"]
-[1,"Output created: README.md\n\nWatching files for changes\n"]
-[1,"Browse at http://localhost:5172/\n"]

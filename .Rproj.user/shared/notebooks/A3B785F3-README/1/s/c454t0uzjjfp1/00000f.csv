@@ -1,0 +1,1 @@
+"0","starwars %>% filter(height < 170) %>% select(name,height)"
