@@ -27,14 +27,18 @@ chirkov.ilya4@yandex.ru
 
 2.  Запустить задание с помощью swirl::swirl()
 
+``` {terminal}
+swirl::swirl()
+```
+
     ![](img/2.png)
 
-3.  Выбрать из меню курсов 1. R Programming: The basics of programming
+1.  Выбрать из меню курсов 1. R Programming: The basics of programming
     in R
 
     ![](img/3.png)
 
-4.  Запустить подкурсы и выполнить:
+2.  Запустить подкурсы и выполнить:
 
     1.  Базовые структурные блоки (Basic Building Blocks)
 
@@ -56,7 +60,7 @@ chirkov.ilya4@yandex.ru
 
         ![](img/8.png)
 
-5.  Составить отчет и выложить его и исходный qmd/rmd файл в свой
+3.  Составить отчет и выложить его и исходный qmd/rmd файл в свой
     репозиторий ![](img/9.png) ![](img/10.png)
 
 ## Оценка результата

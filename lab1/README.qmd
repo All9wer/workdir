@@ -33,6 +33,11 @@
     ![](img/1.png)
   
 2. Запустить задание с помощью swirl::swirl()
+
+```{terminal}
+swirl::swirl()
+```
+    
   
     ![](img/2.png)
   
