@@ -1,0 +1,8 @@
+"0","install.packages(""nycflights13"")"
+"2","WARNING: Rtools is required to build R packages but is not currently installed. Please download and install the appropriate version of Rtools before proceeding:
+
+https://cran.rstudio.com/bin/windows/Rtools/
+"
+"2","Устанавливаю пакет в ‘C:/Users/bkmzc/AppData/Local/R/win-library/4.4’
+(потому что ‘lib’ не определено)
+"
