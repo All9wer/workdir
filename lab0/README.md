@@ -32,16 +32,15 @@ chirkov.ilya4@yandex.ru
     директории И формирование отчета о проделанных действиях, в котором
     должен быть фрагмент кода :
 
-``` r
-print("Hello world!")
-```
+    ![](img/2.png) ![](img/3.png)
 
-    [1] "Hello world!"
+    ``` r
+    print("Hello world!")
+    ```
 
-![](img/2.png) 
-![](img/3.png)
+        [1] "Hello world!"
 
-1.  Рендер отчета
+3.  Рендер отчета
 
     ![](img/4.png)
 
