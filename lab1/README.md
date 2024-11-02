@@ -27,9 +27,17 @@ chirkov.ilya4@yandex.ru
 
 2.  Запустить задание с помощью swirl::swirl()
 
-    ``` {terminal}
-    swirl::swirl()
+    ::: {.cell}
+
+    ``` r
+    'swirl::swirl()'
     ```
+
+    ::: {.cell-output .cell-output-stdout}
+
+        [1] "swirl::swirl()"
+
+    ::: :::
 
     ![](img/2.png)
 
