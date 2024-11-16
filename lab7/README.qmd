@@ -1,0 +1,45 @@
+---
+ title: "Анализ данных сетевого трафика при помощи библиотеки Arrow"
+ author: "chirkov.ilya4@yandex.ru"
+ format: 
+   md:
+     output-file: README.md
+---
+
+## Цель работы 
+
+1. Изучить возможности технологии Apache Arrow для обработки и анализ больших данных
+2. Получить навыки применения Arrow совместно с языком программирования R
+3. Получить навыки анализа метаинфомации о сетевом трафике
+4. Получить навыки применения облачных технологий хранения, подготовки и анализа данных: Yandex Object Storage, Rstudio Server.
+
+## Исходные данные 
+ 
+1. Программное обеспечение Windows 10 
+2. Rstudio Desktop и библиотека Dplyr
+3. Интерпретатор яз/*ыка R 4.1
+4. Сервис Yandex DataLens
+5. Apache Arrow
+
+## Задание
+
+Используя язык программирования R, библиотеку arrow и облачную IDE Rstudio Server, развернутую в Yandex Cloud, выполнить задания и составить отчет.
+
+## План
+
+1.  Выполним практическое задание
+2.  Составим отчет
+
+## Ход работы
+
+### Импорт данных
+
+```{r}
+library(arrow)
+library(tidyverse)
+#download.file('https://storage.yandexcloud.net/arrow-datasets/tm_data.pqt', destfile = "tm_data.pqt")
+#df <- arrow::open_dataset(sources = "data/tm_data.pqt", format = "parquet")
+#glimpse(df)
+```
+### Задание 1. Найдите утечку данных из Вашей сети
+
