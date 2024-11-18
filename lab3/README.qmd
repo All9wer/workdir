@@ -26,7 +26,7 @@
 ### 1. Установка пакета nycflights13
 
 ```{r}
-install.packages("nycflights13")
+#install.packages("nycflights13")
 ```
 
 ### 2. Подгружение библиотек
