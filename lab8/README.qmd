@@ -1,5 +1,5 @@
 ---
- title: "Анализ данных сетевого трафика с использованием аналитической in-memory СУБД DuckDB"
+ title: "Анализ данных сетевого трафика с использованием СУБД DuckDB"
  author: "chirkov.ilya4@yandex.ru"
  format: 
    md:
@@ -32,7 +32,27 @@ Server, развернутую в Yandex Cloud, выполнить задани�
 
 ### Задание 1: Надите утечку данных из Вашей сети
 
+1. Подготовка БД
+
 ```{r}
-#PARQUET_FILE1 = "https://storage.yandexcloud.net/arrow-datasets/tm_data.pqt"
+library(duckdb)
+library(dplyr)
+con <- dbConnect(duckdb::duckdb(), dbdir = "my_db.duckdb", read_only = FALSE)
+#download.file('https://storage.yandexcloud.net/arrow-datasets/tm_data.pqt', destfile = "tm_data.pqt")
+dbExecute(con,"CREATE TABLE tm_data_table as SELECT * FROM read_parquet('tm_data.pqt')")
+```
+
+2. Решение 
+
+```{r}
+query <- "SELECT src
+          FROM tm_data_table
+          WHERE (regexp_matches(src,'^(12|13|14)\\.'))
+          AND NOT (regexp_matches(dst,'^(12|13|14)\\.'))
+          GROUP BY src
+          ORDER BY SUM(bytes) DESC
+          LIMIT 1;"
+
+dbGetQuery(con, query)
 ```
 

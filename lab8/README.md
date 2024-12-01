@@ -28,6 +28,50 @@ chirkov.ilya4@yandex.ru
 
 ### Задание 1: Надите утечку данных из Вашей сети
 
+1.  Подготовка БД
+
 ``` r
-#PARQUET_FILE1 = "https://storage.yandexcloud.net/arrow-datasets/tm_data.pqt"
+library(duckdb)
 ```
+
+    Loading required package: DBI
+
+``` r
+library(dplyr)
+```
+
+
+    Attaching package: 'dplyr'
+
+    The following objects are masked from 'package:stats':
+
+        filter, lag
+
+    The following objects are masked from 'package:base':
+
+        intersect, setdiff, setequal, union
+
+``` r
+con <- dbConnect(duckdb::duckdb(), dbdir = "my_db.duckdb", read_only = FALSE)
+#download.file('https://storage.yandexcloud.net/arrow-datasets/tm_data.pqt', destfile = "tm_data.pqt")
+dbExecute(con,"CREATE TABLE tm_data_table as SELECT * FROM read_parquet('tm_data.pqt')")
+```
+
+    [1] 105747730
+
+1.  Решение
+
+``` r
+query <- "SELECT src
+          FROM tm_data_table
+          WHERE (regexp_matches(src,'^(12|13|14)\\.'))
+          AND NOT (regexp_matches(dst,'^(12|13|14)\\.'))
+          GROUP BY src
+          ORDER BY SUM(bytes) DESC
+          LIMIT 1;"
+
+dbGetQuery(con, query)
+```
+
+               src
+    1 13.37.84.125
