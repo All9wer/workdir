@@ -60,8 +60,8 @@ library(dplyr)
 
 ``` r
 con <- dbConnect(duckdb::duckdb(), dbdir = "my_db.duckdb", read_only = FALSE)
-download.file('https://storage.yandexcloud.net/arrow-datasets/tm_data.pqt', destfile = "tm_data.pqt")
-dbExecute(con,"CREATE TABLE tm_data_table as SELECT * FROM read_parquet('tm_data.pqt')")
+#download.file('https://storage.yandexcloud.net/arrow-datasets/tm_data.pqt', destfile = "tm_data.pqt")
+dbExecute(con,"CREATE TABLE tm_data_table1 as SELECT * FROM read_parquet('tm_data.pqt')")
 ```
 
     [1] 105747730
@@ -70,7 +70,7 @@ dbExecute(con,"CREATE TABLE tm_data_table as SELECT * FROM read_parquet('tm_data
 
 ``` r
 query <- "SELECT src
-          FROM tm_data_table
+          FROM tm_data_table1
           WHERE (regexp_matches(src,'^(12|13|14)\\.'))
           AND NOT (regexp_matches(dst,'^(12|13|14)\\.'))
           GROUP BY src
@@ -95,7 +95,7 @@ dbGetQuery(con, query)
 query <- "SELECT time, COUNT(*) FROM
         (
         SELECT timestamp, src, dst, bytes, EXTRACT(HOUR FROM epoch_ms(CAST(timestamp AS BIGINT))) AS time
-        FROM tm_data_table
+        FROM tm_data_table1
         WHERE (regexp_matches(src,'^(12|13|14)\\.'))
         AND NOT (regexp_matches(dst,'^(12|13|14)\\.'))
         )
@@ -133,7 +133,7 @@ dbGetQuery(con, query)
 query <- "SELECT src, SUM(bytes) AS total
     FROM  (
           SELECT src, bytes, dst, EXTRACT(HOUR FROM epoch_ms(CAST(timestamp AS BIGINT))) AS time
-          FROM tm_data_table
+          FROM tm_data_table1
           )
     WHERE src != '13.37.84.125' AND (regexp_matches(src,'^(12|13|14)\\.'))
         AND NOT (regexp_matches(dst,'^(12|13|14)\\.')) AND time >= 0 AND time <= 15
@@ -157,7 +157,7 @@ dbGetQuery(con, query)
 
 ``` r
 query <- "SELECT port, MAX(bytes) - AVG(bytes)
-        FROM tm_data_table
+        FROM tm_data_table1
         WHERE src != '13.37.84.125' AND src != '12.55.77.96' 
         AND (regexp_matches(src,'^(12|13|14)\\.'))
         AND NOT (regexp_matches(dst,'^(12|13|14)\\.'))
@@ -218,9 +218,10 @@ dbGetQuery(con, query)
 
 ``` r
 query <- "SELECT src, AVG(bytes)
-          FROM tm_data_table
+          FROM tm_data_table1
           WHERE src != '13.37.84.125' AND src != '12.55.77.96' 
           AND (regexp_matches(src,'^(12|13|14)\\.'))
+          AND NOT (regexp_matches(dst,'^(12|13|14)\\.'))
           AND port = 37
           GROUP BY src
           ORDER BY AVG(bytes) DESC
@@ -228,8 +229,8 @@ query <- "SELECT src, AVG(bytes)
 dbGetQuery(con, query)
 ```
 
-              src avg(bytes)
-    1 13.46.35.35    37748.2
+               src avg(bytes)
+    1 14.31.107.42    42953.8
 
 ## Оценка результата
 
