@@ -60,7 +60,7 @@ library(dplyr)
 
 ``` r
 con <- dbConnect(duckdb::duckdb(), dbdir = "my_db.duckdb", read_only = FALSE)
-#download.file('https://storage.yandexcloud.net/arrow-datasets/tm_data.pqt', destfile = "tm_data.pqt")
+download.file('https://storage.yandexcloud.net/arrow-datasets/tm_data.pqt', destfile = "tm_data.pqt")
 dbExecute(con,"CREATE TABLE tm_data_table1 as SELECT * FROM read_parquet('tm_data.pqt')")
 ```
 
