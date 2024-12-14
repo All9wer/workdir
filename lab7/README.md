@@ -38,32 +38,18 @@ Rstudio Server, развернутую в Yandex Cloud, выполнить за�
 library(arrow)
 ```
 
-    Warning: пакет 'arrow' был собран под R версии 4.4.2
+    Some features are not enabled in this build of Arrow. Run `arrow_info()` for more information.
 
 
-    Присоединяю пакет: 'arrow'
+    Attaching package: 'arrow'
 
-    Следующий объект скрыт от 'package:utils':
+    The following object is masked from 'package:utils':
 
         timestamp
 
 ``` r
 library(tidyverse)
 ```
-
-    Warning: пакет 'tidyverse' был собран под R версии 4.4.2
-
-    Warning: пакет 'ggplot2' был собран под R версии 4.4.2
-
-    Warning: пакет 'tidyr' был собран под R версии 4.4.2
-
-    Warning: пакет 'readr' был собран под R версии 4.4.2
-
-    Warning: пакет 'purrr' был собран под R версии 4.4.2
-
-    Warning: пакет 'forcats' был собран под R версии 4.4.2
-
-    Warning: пакет 'lubridate' был собран под R версии 4.4.2
 
     ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
     ✔ dplyr     1.1.4     ✔ readr     2.1.5
@@ -118,7 +104,7 @@ glimpse(z2)
     $ time       <int> 16, 22, 18, 23, 19, 21, 17, 20, 13, 7, 0, 3, 14, 6, 12, 10,…
     $ trafictime <int> 4490576, 4489703, 4489386, 4488093, 4487345, 4487109, 44835…
 
-Следовательно: нерабочие часы - 1-15; рабочие часы - 16-24, тогда
+тогда:
 
 ``` r
 nz2 <- df%>%mutate(time=hour(as_datetime(timestamp/1000)))%>%filter(!grepl("^13.37.84.125",src))%>% filter(grepl("^12.|^13.|^14.", src) & !grepl("^12.|^13.|^14.", dst))%>%filter(time>=1&time<=15)%>%group_by(src)%>%summarise("sum" =sum(bytes))%>%select(src,sum)
@@ -141,23 +127,22 @@ glimpse(nz22)
 отличается от нарушителей из предыдущих задач.
 
 ``` r
-z3 <- df %>% filter(!grepl("^13.37.84.125",src)& !grepl("^12.55.77.96",src))%>% select(src, bytes, port) 
+z3 <- df %>% filter(!grepl("^13.37.84.125",src)& !grepl("^12.55.77.96",src))%>% filter(grepl("^12.|^13.|^14.", src) & !grepl("^12.|^13.|^14.", dst))%>% select(src, bytes, port) 
 z33 <- z3%>%group_by(port)%>%summarise("mean"=mean(bytes),"max"=max(bytes),"sum"=sum(bytes))%>%mutate("Raz"= max-mean)%>%filter(Raz!=0, Raz>170000)
-z333 <- z3%>%filter(port==37)%>%group_by(src)%>%summarise("mean"=mean(bytes))%>%filter(mean>37543)%>%select(src)
+z333 <- z3%>%filter(port==37)%>%group_by(src)%>%summarise("mean"=mean(bytes))%>%arrange(desc(mean))%>%select(src)
 glimpse(z333)
 ```
 
-    Rows: 33
+    Rows: 998
     Columns: 1
-    $ src <chr> "13.46.35.35", "15.110.113.94", "15.35.40.26", "15.36.118.82", "15…
+    $ src <chr> "14.31.107.42", "14.42.60.94", "13.38.62.122", "12.34.57.42", "13.…
 
-Ответ: 13.46.35.35
+Ответ: 14.31.107.42
 
 ## Оценка результата
 
-Используя язык программирования R, библиотеку arrow и облачную IDE
-Rstudio Server, развернутую в Yandex Cloud, задания были успешно
-выполнены.
+При использовании языка программирования R и библиотеки arrow задания
+были успешно выполнены.
 
 ## Вывод
 
