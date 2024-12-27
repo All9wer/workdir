@@ -78,8 +78,7 @@ chirkov.ilya4@yandex.ru
 5.  Все построенные графики вывести в виде единого дашборда в Yandex
     DataLens
 
-    Ссылка на дашборд:
-    https://datalens.yandex.cloud/0gfuvvrqj1k2n-chirkovvs-dashboard
+    Ссылка на дашборд: https://datalens.yandex/0gfuvvrqj1k2n
 
     ![](img/10.png)
 
